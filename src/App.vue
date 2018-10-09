@@ -7,11 +7,20 @@
 
 <script>
 import FooterGuide from './components/FooterGuide/FooterGuide'
+// import { reqFoodTypes } from './api'
+// import { mapMutations } from 'store'
 export default {
   name: 'App',
   components: {
     FooterGuide
+  },
+  async mounted () {
+    this.$store.dispatch('getAddress')
   }
+  // async mounted () {
+  //   const result = await reqFoodTypes()
+  //   console.log(result)
+  // }
 }
 </script>
 
