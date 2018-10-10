@@ -7,17 +7,18 @@ export default {
   [RECEIVE_ADDRESS] (state, {
     address
   }) {
-    console.log(address)
+    // console.log(address)
     state.address = address
   },
   [RECEIVE_CATEGORY] (state, {
-    category
+    categorys
   }) {
-    state.category = category
+    state.categorys = categorys
   },
   [RECEIVE_SHOPS] (state, {
     shops
   }) {
+    console.log(shops)
     state.shops = shops
   }
 }

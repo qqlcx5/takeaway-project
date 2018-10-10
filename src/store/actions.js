@@ -28,9 +28,9 @@ export default {
   }) {
     const result = await reqFoodCategorys()
     if (result.code === 0) {
-      const category = result.data
+      const categorys = result.data
       commit(RECEIVE_CATEGORY, {
-        category
+        categorys
       })
     }
   },
