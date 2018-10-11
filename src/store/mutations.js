@@ -18,7 +18,7 @@ export default {
   [RECEIVE_SHOPS] (state, {
     shops
   }) {
-    console.log(shops)
+    // console.log(shops)
     state.shops = shops
   }
 }

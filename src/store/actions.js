@@ -40,10 +40,10 @@ export default {
   }) {
     const {
       longitude,
-      latitudes
+      latitude
     } = state
-
-    const result = await reqShops(longitude, latitudes)
+    // console.log(longitude, latitude)
+    const result = await reqShops(longitude, latitude)
     if (result.code === 0) {
       const shops = result.data
       commit(RECEIVE_SHOPS, {

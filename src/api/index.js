@@ -12,10 +12,7 @@ const BASE_URL = '/api'
 // 用户登出](# 10 用户登出)
 export const reqAddress = (geohash) => ajax(`${BASE_URL}/position/${geohash}`)
 export const reqFoodCategorys = () => ajax(BASE_URL + '/index_category')
-export const reqShops = ({
-  longitude,
-  latitude
-}) => ajax('/shops', {
+export const reqShops = (longitude, latitude) => ajax(BASE_URL + '/shops', {
   longitude,
   latitude
 })

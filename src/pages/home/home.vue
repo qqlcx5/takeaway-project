@@ -13,7 +13,8 @@
     </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
-      <div class="swiper-container">
+      <div class="swiper-container"
+           v-if="categorysArr.length">
         <div class="swiper-wrapper">
           <div class="swiper-slide"
                v-for="(categorys,index) in categorysArr"
@@ -31,6 +32,10 @@
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
+      </div>
+      <div v-else>
+        <img src="./images/msite_back.svg"
+             alt="">
       </div>
     </nav>
     <!--首页附近商家-->
@@ -93,7 +98,7 @@ export default {
       //   })
       // }, 100)
       this.$nextTick(() => {
-        new Swiper('.swiper-container', {
+        this.swiper = new Swiper('.swiper-container', {
           loop: true,
           pagination: {
             el: '.swiper-pagination'
@@ -107,7 +112,7 @@ export default {
   },
   data () {
     return {
-      baseImageUrl: 'https://fuss10.elemecdn.com'
+      baseImageUrl: 'https://fuss10.elemecdn.com' // icon图片基础路径
     }
   }
 }
