@@ -5,19 +5,25 @@
         <h2 class="login_logo">硅谷外卖</h2>
         <div class="login_header_title">
           <a href="javascript:;"
-             class="on">短信登录</a>
-          <a href="javascript:;">密码登录</a>
+             :class="{on:loginWay}"
+             @click="loginWay=true">短信登录</a>
+          <a href="javascript:;"
+             :class="{on:!loginWay}"
+             @click="loginWay=false"> 密码登录</a>
         </div>
       </div>
       <div class="login_content">
         <form>
-          <div class="on">
+          <div :class="{on:loginWay}">
             <section class="login_message">
               <input type="tel"
                      maxlength="11"
+                     v-model="phone"
                      placeholder="手机号">
-              <button disabled="disabled"
-                      class="get_verification">获取验证码</button>
+              <button :disabled="!rightPhone"
+                      class="get_verification"
+                      :class="{right_phone:rightPhone}"
+                      @click.prevent="getCode">{{computeTime > 0 ? `已发送(${computeTime}s)` : '获取验证码'}}</button>
             </section>
             <section class="login_verification">
               <input type="tel"
@@ -29,7 +35,7 @@
               <a href="javascript:;">《用户服务协议》</a>
             </section>
           </div>
-          <div>
+          <div :class="{on:!loginWay}">
             <section>
               <section class="login_message">
                 <input type="tel"
@@ -74,7 +80,33 @@ export default {
   name: 'login',
   data () {
     return {
+      loginWay: true, // 1短信登陆，2密码登陆
+      phone: '',
+      computeTime: 0
+    }
+  },
+  computed: {
+    rightPhone () {
+      const testphone = /^1\d{10}$/.test(this.phone)
+      console.log(testphone)
+      return testphone
+    }
 
+  },
+  methods: {
+    getCode () {
+      // 定时器
+      if (!this.computeTime) {
+        this.computeTime = 30
+        const IntervalTime = setInterval(() => {
+          this.computeTime--
+          console.log(this.computeTime)
+          if (this.computeTime <= 0) {
+            clearInterval(IntervalTime)
+          }
+        }, 1000)
+      }
+      // 发送ajax
     }
   }
 }
@@ -100,6 +132,7 @@ export default {
         text-align center
         >a
           color #333
+          cursor pointer
           font-size 14px
           padding-bottom 4px
           &:first-child
@@ -140,6 +173,8 @@ export default {
               color #ccc
               font-size 14px
               background transparent
+              &.right_phone
+                color #000
           .login_verification
             position relative
             margin-top 16px
@@ -206,8 +241,8 @@ export default {
         color #999
     .go_back
       position absolute
-      top 5px
-      left 5px
+      top 10px
+      left 10px
       width 30px
       height 30px
       >.iconfont
