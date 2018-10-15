@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="login_content">
-        <form>
+        <form @submit.prevent="login">
           <div :class="{on:loginWay}">
             <section class="login_message">
               <input type="tel"
@@ -28,7 +28,8 @@
             <section class="login_verification">
               <input type="tel"
                      maxlength="8"
-                     placeholder="验证码">
+                     placeholder="验证码"
+                     v-model="code">
             </section>
             <section class="login_hint">
               温馨提示：未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -38,25 +39,38 @@
           <div :class="{on:!loginWay}">
             <section>
               <section class="login_message">
-                <input type="tel"
-                       maxlength="11"
-                       placeholder="手机/邮箱/用户名">
+                <input type="text"
+                       maxlength="20"
+                       placeholder="手机/邮箱/用户名"
+                       v-model="name">
               </section>
               <section class="login_verification">
                 <input type="tel"
                        maxlength="8"
-                       placeholder="密码">
-                <div class="switch_button off">
-                  <div class="switch_circle"></div>
-                  <span class="switch_text">...</span>
+                       placeholder="密码"
+                       v-if=showPwd
+                       v-model="pwd">
+                <input type="password"
+                       maxlength="8"
+                       placeholder="密码"
+                       v-else
+                       v-model="pwd">
+                <div class="switch_button "
+                     :class="showPwd ? 'on':'off'"
+                     @click="showPwd=!showPwd">
+                  <div class="switch_circle"
+                       :class="{right:showPwd}"></div>
+                  <span class="switch_text">{{showPwd? 'abc':'...'}}</span>
                 </div>
               </section>
               <section class="login_message">
                 <input type="text"
                        maxlength="11"
-                       placeholder="验证码">
+                       placeholder="验证码"
+                       v-model="captcha">
                 <img class="get_verification"
-                     src="./images/captcha.svg"
+                     src="http://localhost:4000/captcha"
+                     @click="getCaptcha"
                      alt="captcha">
               </section>
             </section>
@@ -72,17 +86,29 @@
            @click="$router.go(-1)"></i>
       </a>
     </div>
+    <AlertTip v-if="showAlert"
+              :alertText="alertText"
+              @closeTip="closeTip"></AlertTip>
   </section>
 </template>
 
 <script>
+import AlertTip from '@/components/AlertTip/AlertTip'
 export default {
   name: 'login',
   data () {
     return {
       loginWay: true, // 1短信登陆，2密码登陆
       phone: '',
-      computeTime: 0
+      code: '',
+      computeTime: 0,
+      showPwd: false,
+      name: '',
+      pwd: '',
+      captcha: '',
+      showAlert: false,
+      alertText: ''
+
     }
   },
   computed: {
@@ -94,6 +120,7 @@ export default {
 
   },
   methods: {
+
     getCode () {
       // 定时器
       if (!this.computeTime) {
@@ -107,7 +134,45 @@ export default {
         }, 1000)
       }
       // 发送ajax
+    },
+    AlertWay (alertText) {
+      this.showAlert = true
+      this.alertText = alertText
+    },
+    closeTip () {
+      this.showAlert = false
+      this.alertText = ''
+    },
+    login () {
+      if (this.loginWay) {
+        const { rightPhone, code } = this
+        if (!rightPhone) {
+          // 手机号出错
+          this.AlertWay('手机号出错')
+        } else if (!/^\d{6}$/.test(code)) {
+          // 验证码不正确
+          this.AlertWay('验证码不正确')
+        }
+      } else {
+        const { name, pwd, captcha } = this
+        if (!name) {
+          // 用户名必须指定
+          this.AlertWay('用户名必须指定')
+        } else if (!pwd) {
+          // 密码必须指定
+          this.AlertWay('密码必须指定')
+        } else if (!captcha) {
+          // 图形验证码必须指定
+          this.AlertWay('图形验证码必须指定')
+        }
+      }
+    },
+    getCaptcha (event) {
+      event.target.src = 'http://localhost:4000/captcha?time=' + Date.now()
     }
+  },
+  components: {
+    AlertTip
   }
 }
 </script>
@@ -214,6 +279,8 @@ export default {
                 background #fff
                 box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.1)
                 transition transform 0.3s
+                &.right
+                  transform translateX(30px)
           .login_hint
             margin-top 12px
             color #999

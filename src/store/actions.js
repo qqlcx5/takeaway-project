@@ -2,11 +2,26 @@ import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORY,
   RECEIVE_SHOPS
+  // REQPWDLOGIN,
+  // REQSENDCODE,
+  // REQSMSLOGIN,
+  // REQUSERINFO,
+  // REQLOGOUT
 } from './mutation-types'
 import {
   reqAddress,
   reqFoodCategorys,
   reqShops
+  // // 用户名密码登陆
+  // reqPwdLogin,
+  // // 发送短信验证码
+  // reqSendCode,
+  // // 手机号验证码登陆
+  // reqSmsLogin,
+  // // 根据会话获取用户信息
+  // reqUserInfo,
+  // // 用户登出
+  // reqLogout
 } from '../api'
 
 export default {
@@ -51,5 +66,4 @@ export default {
       })
     }
   }
-
 }

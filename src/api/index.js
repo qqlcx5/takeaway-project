@@ -4,7 +4,6 @@ const BASE_URL = '/api'
 // 获取食品分类列表](# 2 获取食品分类列表)
 // 根据经纬度获取商铺列表](#3根据经纬度获取商铺列表)
 // 根据经纬度和关键字搜索商铺列表]
-// 获取一次性验证码](#5获取一次性验证码)
 // 用户名密码登陆](# 6 用户名密码登陆)
 // 发送短信验证码](#7发送短信验证码)
 // 手机号验证码登陆](# 8 手机号验证码登陆)
@@ -31,6 +30,7 @@ export const reqPwdLogin = ({
   pwd,
   captcha
 }, 'POST')
+
 // 7、发送短信验证码
 export const reqSendCode = (phone) => ajax(BASE_URL + '/sendcode', {
   phone
@@ -48,14 +48,14 @@ export const reqLogout = () => ajax(BASE_URL + '/logout')
 /**
  * 获取商家信息
  */
-export const reqShopInfo = () => ajax('/info')
+// export const reqShopInfo = () => ajax('/info')
 
 /**
  * 获取商家评价数组
  */
-export const reqShopRatings = () => ajax('/ratings')
+// export const reqShopRatings = () => ajax('/ratings')
 
 /**
  * 获取商家商品数组
  */
-export const reqShopGoods = () => ajax('/goods')
+// export const reqShopGoods = () => ajax('/goods')
