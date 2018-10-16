@@ -71,7 +71,8 @@
                 <img class="get_verification"
                      src="http://localhost:4000/captcha"
                      @click="getCaptcha"
-                     alt="captcha">
+                     alt="captcha"
+                     ref="captcha">
               </section>
             </section>
           </div>
@@ -94,6 +95,8 @@
 
 <script>
 import AlertTip from '@/components/AlertTip/AlertTip'
+import { reqSendCode, reqSmsLogin, reqPwdLogin } from '@/api'
+
 export default {
   name: 'login',
   data () {
@@ -121,21 +124,30 @@ export default {
   },
   methods: {
 
-    getCode () {
+    async getCode () {
       // 定时器
       if (!this.computeTime) {
         this.computeTime = 30
-        const IntervalTime = setInterval(() => {
+        this.IntervalId = setInterval(() => {
           this.computeTime--
           console.log(this.computeTime)
           if (this.computeTime <= 0) {
-            clearInterval(IntervalTime)
+            clearInterval(this.IntervalId)
           }
         }, 1000)
+        // 发送ajax
+        const result = await reqSendCode(this.phone)
+        if (result.code === 1) {
+          this.AlertMsg(result.msg)
+          if (this.computeTime) {
+            this.computeTime = 0
+            clearInterval(this.IntervalId)
+            this.IntervalId = undefined
+          }
+        }
       }
-      // 发送ajax
     },
-    AlertWay (alertText) {
+    AlertMsg (alertText) {
       this.showAlert = true
       this.alertText = alertText
     },
@@ -143,32 +155,47 @@ export default {
       this.showAlert = false
       this.alertText = ''
     },
-    login () {
+    async login () {
+      let result
       if (this.loginWay) {
-        const { rightPhone, code } = this
+        const { rightPhone, phone, code } = this
         if (!rightPhone) {
           // 手机号出错
-          this.AlertWay('手机号出错')
+          return this.AlertMsg('手机号出错')
         } else if (!/^\d{6}$/.test(code)) {
           // 验证码不正确
-          this.AlertWay('验证码不正确')
+          return this.AlertMsg('验证码不正确')
         }
+        result = await reqSmsLogin(phone, code)
       } else {
         const { name, pwd, captcha } = this
         if (!name) {
           // 用户名必须指定
-          this.AlertWay('用户名必须指定')
+          return this.AlertMsg('用户名必须指定')
         } else if (!pwd) {
           // 密码必须指定
-          this.AlertWay('密码必须指定')
+          return this.AlertMsg('密码必须指定')
         } else if (!captcha) {
           // 图形验证码必须指定
-          this.AlertWay('图形验证码必须指定')
+          return this.AlertMsg('图形验证码必须指定')
         }
+        result = await reqPwdLogin({ name, pwd, captcha })
+      }
+      if (result.code === 0) {
+        // 存入vuex
+        const user = result.data
+        this.$store.dispatch('recordUser', user)
+        // 跳转页面
+        this.$router.push('/profile')
+      } else {
+        const msg = result.msg
+        this.AlertMsg(msg)
+        this.getCaptcha()
       }
     },
-    getCaptcha (event) {
-      event.target.src = 'http://localhost:4000/captcha?time=' + Date.now()
+    getCaptcha () {
+      this.$refs.captcha.src = 'http://localhost:4000/captcha?time=' + Date.now()
+      // event.target.src = 'http://localhost:4000/captcha?time=' + Date.now()
     }
   },
   components: {

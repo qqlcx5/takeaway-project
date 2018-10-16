@@ -20,8 +20,8 @@
         <span>订单</span>
       </article>
       <article class="item"
-               :class="{on: '/prifile'===$route.path }"
-               @click="goTo('/prifile')">
+               :class="{on: '/profile'===$route.path }"
+               @click="goTo('/profile')">
         <i class="iconfont icon-geren"></i>
         <span>我的</span>
       </article>

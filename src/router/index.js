@@ -3,7 +3,7 @@ import Router from 'vue-router'
 // pages
 import home from '@/pages/home/home'
 import order from '@/pages/order/order'
-import prifile from '@/pages/prifile/prifile'
+import profile from '@/pages/profile/profile'
 import search from '@/pages/search/search'
 import login from '@/pages/login/login'
 // components
@@ -33,9 +33,9 @@ export default new Router({
     }
   },
   {
-    path: '/prifile',
-    name: 'prifile',
-    component: prifile,
+    path: '/profile',
+    name: 'profile',
+    component: profile,
     meta: {
       showFooter: true
     }
