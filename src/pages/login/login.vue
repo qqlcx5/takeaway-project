@@ -194,6 +194,7 @@ export default {
       }
     },
     getCaptcha () {
+      // 图形验证码
       this.$refs.captcha.src = 'http://localhost:4000/captcha?time=' + Date.now()
       // event.target.src = 'http://localhost:4000/captcha?time=' + Date.now()
     }

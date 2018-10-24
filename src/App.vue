@@ -7,23 +7,20 @@
 
 <script>
 import FooterGuide from './components/FooterGuide/FooterGuide'
-// import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
     FooterGuide
+  },
+  async mounted () {
+    // this.$store.dispatch('getAddress')
+    this.getUserInfo()
+  },
+  methods: {
+    ...mapActions(['getUserInfo'])
   }
-  // async mounted () {
-  //   // this.$store.dispatch('getAddress')
-  //   this.getAddress()
-  // },
-  // methods: {
-  //   ...mapActions(['getAddress'])
-  // }
-  // async mounted () {
-  //   const result = await reqFoodTypes()
-  //   console.log(result)
-  // }
+
 }
 </script>
 

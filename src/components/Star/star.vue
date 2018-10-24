@@ -32,7 +32,7 @@ export default {
       while (starArr.length < 5) {
         starArr.push(CLASS_OFF)
       }
-      console.log(starArr)
+      // console.log(starArr)
       return starArr
     }
 

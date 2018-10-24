@@ -2,7 +2,8 @@ import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORY,
   RECEIVE_SHOPS,
-  RECEIVE_USER_INFO
+  RECEIVE_USER_INFO,
+  RESET_USER_INFO
   // REQPWDLOGIN,
   // REQSENDCODE,
   // REQSMSLOGIN,
@@ -12,7 +13,9 @@ import {
 import {
   reqAddress,
   reqFoodCategorys,
-  reqShops
+  reqShops,
+  reqUserInfo,
+  reqLogout
   // // 用户名密码登陆
   // reqPwdLogin,
   // // 发送短信验证码
@@ -22,7 +25,6 @@ import {
   // // 根据会话获取用户信息
   // reqUserInfo,
   // // 用户登出
-  // reqLogout
 } from '../api'
 
 export default {
@@ -67,11 +69,32 @@ export default {
       })
     }
   },
+  // 同步记录用户信息
   recordUser ({
     commit
   }, userInfo) {
     commit(RECEIVE_USER_INFO, {
       userInfo
     })
+  },
+  // 1
+  async getUserInfo ({
+    commit
+  }) {
+    const result = await reqUserInfo()
+    if (result.code === 0) {
+      const userInfo = result.data
+      commit(RECEIVE_USER_INFO, {
+        userInfo
+      })
+    }
+  },
+  async getLogout ({
+    commit
+  }) {
+    const result = await reqLogout()
+    if (result.code === 0) {
+      commit(RESET_USER_INFO)
+    }
   }
 }

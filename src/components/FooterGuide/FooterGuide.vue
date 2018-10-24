@@ -10,7 +10,7 @@
       <article class="item"
                :class="{on: '/search'===$route.path }"
                @click="goTo('/search')">
-        <i class="iconfont icon-sousuo"></i>
+        <i class="iconfont icon-sousuo1"></i>
         <span>搜索</span>
       </article>
       <article class="item"

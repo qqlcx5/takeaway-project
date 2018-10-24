@@ -6,6 +6,7 @@ import order from '@/pages/order/order'
 import profile from '@/pages/profile/profile'
 import search from '@/pages/search/search'
 import login from '@/pages/login/login'
+import userinfo from '@/pages/profile/userinfo'
 // components
 // import FooterGuide from '@/components/FooterGuide/FooterGuide'
 
@@ -52,6 +53,11 @@ export default new Router({
     path: '/login',
     name: 'login',
     component: login
+  },
+  {
+    path: '/userinfo',
+    name: 'userinfo',
+    component: userinfo
   }
   ]
 })

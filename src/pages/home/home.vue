@@ -3,13 +3,18 @@
     <!--首页头部-->
     <HeaderTop :title="address.name">
       <span class="header_search"
-            slot="left">
-        <i class="iconfont icon-sousuo"></i>
+            slot="left"
+            @click="$router.push('/search')">
+        <i class="iconfont icon-sousuo1"></i>
       </span>
-      <span class="header_login"
-            slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
+      <router-link class="header_login"
+                   :to="{name: userInfo._id? 'userinfo':'login'}"
+                   slot="right">
+        <span class="header_login_text"
+              v-if="!userInfo._id">登录|注册</span>
+        <span class="header_login_text"
+              v-else> <i class="iconfont icon-zhanghao"></i></span>
+      </router-link>
     </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
@@ -64,7 +69,7 @@ export default {
 
   },
   computed: {
-    ...mapState(['address', 'categorys', 'shops']),
+    ...mapState(['address', 'categorys', 'shops', 'userInfo']),
     categorysArr () {
       const { categorys } = this
       const arr = []
