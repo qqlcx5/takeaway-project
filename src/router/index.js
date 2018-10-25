@@ -7,8 +7,10 @@ import profile from '@/pages/profile/profile'
 import search from '@/pages/search/search'
 import login from '@/pages/login/login'
 import userinfo from '@/pages/profile/userinfo'
-// components
-// import FooterGuide from '@/components/FooterGuide/FooterGuide'
+import shop from '@/pages/shop/shop'
+import shopGoods from '@/pages/shop/shopGoods/shopGoods'
+import shopRatings from '@/pages/shop/shopRatings/shopRatings'
+import shopInfo from '@/pages/shop/shopInfo/shopInfo'
 
 Vue.use(Router)
 
@@ -58,6 +60,32 @@ export default new Router({
     path: '/userinfo',
     name: 'userinfo',
     component: userinfo
+  },
+  {
+    // 商家详情的页面
+    path: '/shop',
+    // name: 'shop',
+    component: shop,
+    children: [{
+      path: '/shop/goods',
+      name: 'shopGoods',
+      component: shopGoods
+    },
+    {
+      path: '/shop/ratings',
+      name: 'shopRatings',
+      component: shopRatings
+    },
+    {
+      path: '/shop/info',
+      name: 'shopInfo',
+      component: shopInfo
+    },
+    {
+      path: '/',
+      redirect: '/shop/goods'
+    }
+    ]
   }
   ]
 })

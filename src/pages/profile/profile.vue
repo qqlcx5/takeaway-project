@@ -99,14 +99,16 @@
       <!-- 服务中心 -->
       <mt-button type="danger"
                  style="width:100%"
-                 @click="logout">退出登陆</mt-button>
+                 @click="logout"
+                 v-show="userInfo._id">退出登陆</mt-button>
     </section>
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { MessageBox } from 'mint-ui'
+import { MessageBox, Toast } from 'mint-ui'
+
 import HeaderTop from '@/components/HeaderTop/HeaderTop'
 export default {
   name: 'prifile',
@@ -119,7 +121,10 @@ export default {
   methods: {
     logout () {
       MessageBox.confirm('确定执行此操作?').then(action => {
-        this.$store.dispatch('logout')
+        this.$store.dispatch('getLogout')
+        Toast({
+          message: '账号退出成功'
+        })
       })
     }
   },
