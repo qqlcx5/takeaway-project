@@ -125,12 +125,16 @@ export default {
         Toast({
           message: '账号退出成功'
         })
-      })
+      },
+      action => {
+        console.log('点击了取消')
+      }
+
+      )
     }
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   }
 }

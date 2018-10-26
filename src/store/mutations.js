@@ -3,7 +3,10 @@ import {
   RECEIVE_CATEGORY,
   RECEIVE_SHOPS,
   RECEIVE_USER_INFO,
-  RESET_USER_INFO
+  RESET_USER_INFO,
+  RECEIVE_GOODS,
+  RECEIVE_RATINGS,
+  RECEIVE_INFO
 } from './mutation-types'
 export default {
   [RECEIVE_ADDRESS] (state, {
@@ -31,5 +34,23 @@ export default {
   [RESET_USER_INFO] (state) {
     console.log('RESET_USER_INFO')
     state.userInfo = {}
+  },
+  [RECEIVE_GOODS] (state, {
+    goods
+  }) {
+    console.log(goods)
+    state.goods = goods
+  },
+  [RECEIVE_RATINGS] (state, {
+    ratings
+  }) {
+    // console.log(ratings)
+    state.ratings = ratings
+  },
+  [RECEIVE_INFO] (state, {
+    info
+  }) {
+    // console.log(info)
+    state.info = info
   }
 }

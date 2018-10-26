@@ -3,28 +3,24 @@ import {
   RECEIVE_CATEGORY,
   RECEIVE_SHOPS,
   RECEIVE_USER_INFO,
-  RESET_USER_INFO
-  // REQPWDLOGIN,
-  // REQSENDCODE,
-  // REQSMSLOGIN,
-  // REQUSERINFO,
-  // REQLOGOUT
+  RESET_USER_INFO,
+  RECEIVE_GOODS,
+  RECEIVE_RATINGS,
+  RECEIVE_INFO
 } from './mutation-types'
 import {
+  // 请求地址
   reqAddress,
+  // 食物分类
   reqFoodCategorys,
   reqShops,
+  // 请求用户信息
   reqUserInfo,
-  reqLogout
-  // // 用户名密码登陆
-  // reqPwdLogin,
-  // // 发送短信验证码
-  // reqSendCode,
-  // // 手机号验证码登陆
-  // reqSmsLogin,
-  // // 根据会话获取用户信息
-  // reqUserInfo,
-  // // 用户登出
+  // 用户登出
+  reqLogout,
+  reqShopGoods,
+  reqShopRatings,
+  reqShopInfo
 } from '../api'
 
 export default {
@@ -77,7 +73,7 @@ export default {
       userInfo
     })
   },
-  // 1
+  // 获得用户信息
   async getUserInfo ({
     commit
   }) {
@@ -95,6 +91,39 @@ export default {
     const result = await reqLogout()
     if (result.code === 0) {
       commit(RESET_USER_INFO)
+    }
+  },
+  async getShopGoods ({
+    commit
+  }) {
+    const result = await reqShopGoods()
+    if (result.code === 0) {
+      const goods = result.data
+      commit(RECEIVE_GOODS, {
+        goods
+      })
+    }
+  },
+  async getShopRatings ({
+    commit
+  }) {
+    const result = await reqShopRatings()
+    if (result.code === 0) {
+      const ratings = result.data
+      commit(RECEIVE_RATINGS, {
+        ratings
+      })
+    }
+  },
+  async getShopInfo ({
+    commit
+  }) {
+    const result = await reqShopInfo()
+    if (result.code === 0) {
+      const info = result.data
+      commit(RECEIVE_INFO, {
+        info
+      })
     }
   }
 }

@@ -4,10 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+// 全局引入mint-UI
 import 'mint-ui/lib/style.css'
 import {
   Button
 } from 'mint-ui'
+// 引入Mockjs数据
+import './mock/mockServer'
 Vue.component(Button.name, Button)
 Vue.config.productionTip = false
 

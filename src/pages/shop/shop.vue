@@ -20,11 +20,20 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import shopHeader from '../../components/shopHeader/shopHeader'
 export default {
   name: 'shop',
   components: {
     shopHeader
+  },
+  methods: {
+    ...mapActions(['getShopGoods', 'getShopInfo', 'getShopRatings'])
+  },
+  mounted () {
+    this.getShopGoods()
+    this.getShopInfo()
+    this.getShopRatings()
   }
 }
 </script>
