@@ -335,10 +335,6 @@ export default {
     z-index 52
     flex-direction column
     color #333
-    // &.fade-enter-active, &.fade-leave-active
-    // transition opacity 1s
-    // &.fade-enter, &.fade-leave-to
-    // opacity 0
     .brief-modal-cover
       position absolute
       width 100%
