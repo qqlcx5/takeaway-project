@@ -28,12 +28,10 @@ export default {
     shopHeader
   },
   methods: {
-    ...mapActions(['getShopGoods', 'getShopInfo', 'getShopRatings'])
+    ...mapActions(['getShopInfo'])
   },
   mounted () {
-    this.getShopGoods()
     this.getShopInfo()
-    this.getShopRatings()
   }
 }
 </script>
