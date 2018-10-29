@@ -95,13 +95,14 @@ export default {
   },
   async getShopGoods ({
     commit
-  }) {
+  }, cb) {
     const result = await reqShopGoods()
     if (result.code === 0) {
       const goods = result.data
       commit(RECEIVE_GOODS, {
         goods
       })
+      cb && cb()
     }
   },
   async getShopRatings ({

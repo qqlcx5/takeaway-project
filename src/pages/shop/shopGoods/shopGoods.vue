@@ -18,6 +18,7 @@
           </li>
         </ul>
       </div>
+
       <div class="foods-wrapper">
         <ul ref="foodsUl">
           <li class="food-list-hook"
@@ -60,13 +61,52 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import BScroll from 'better-scroll'
 export default {
   name: 'shopGoods',
+  data () {
+    return {
+      scrollY: 0,
+      tops: []
+    }
+  },
   mounted () {
-    this.$store.dispatch('getShopGoods')
+    this.$store.dispatch('getShopGoods', () => {
+      this.$nextTick(() => {
+        this._initScroll()
+        this._initTops()
+      })
+    })
   },
   computed: {
     ...mapState(['goods'])
+  },
+  methods: {
+    _initScroll () {
+      this.menu = new BScroll('.menu-wrapper')
+      const foodScroll = new BScroll('.foods-wrapper', {
+        probeType: 2
+      })
+      foodScroll.on('scroll', ({ x, y }) => {
+        this.scrollY = Math.abs(y)
+        console.log(x, this.scrollY)
+      })
+    },
+    _initTops () {
+      const tops = []
+      let top = 0
+      tops.push(top)
+      const lis = this.$refs.foodsUl.children
+      Array.prototype.slice.call(lis).forEach(li => {
+        top += li.clientHeight
+        tops.push(top)
+      })
+      this.tops = tops
+      console.log(tops)
+    },
+    currentIndex () {
+
+    }
   }
 }
 </script>

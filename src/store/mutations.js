@@ -38,7 +38,7 @@ export default {
   [RECEIVE_GOODS] (state, {
     goods
   }) {
-    console.log(goods)
+    // console.log(goods)
     state.goods = goods
   },
   [RECEIVE_RATINGS] (state, {
