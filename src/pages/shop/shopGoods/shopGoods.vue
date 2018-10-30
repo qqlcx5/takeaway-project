@@ -18,7 +18,6 @@
           </li>
         </ul>
       </div>
-
       <div class="foods-wrapper">
         <ul ref="foodsUl">
           <li class="food-list-hook"
@@ -47,9 +46,7 @@
                     <span class="old"
                           v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
-                  <div class="cartcontrol-wrapper">
-                    购物车
-                  </div>
+                  <div class="cartcontrol-wrapper">购物车</div>
                 </div>
               </li>
             </ul>
@@ -79,19 +76,40 @@ export default {
     })
   },
   computed: {
-    ...mapState(['goods'])
+    ...mapState(['goods']),
+    currentIndex () {
+      // 初始和相关数据发生了变化
+      // 得到条件数据
+      const { scrollY, tops } = this
+      // 根据条件计算产生一个结果
+      const index = tops.findIndex((top, index) => {
+        // scrollY>=当前top && scrollY<下一个top
+        return scrollY >= top && scrollY < tops[index + 1]
+      })
+      // 返回结果
+      // console.log(index)
+      return index
+    }
   },
   methods: {
+    // 初始化滚动条
     _initScroll () {
-      this.menu = new BScroll('.menu-wrapper')
-      const foodScroll = new BScroll('.foods-wrapper', {
-        probeType: 2
+      this.menuScroll = new BScroll('.menu-wrapper', {
+        click: true
       })
-      foodScroll.on('scroll', ({ x, y }) => {
+      this.foodScroll = new BScroll('.foods-wrapper', {
+        probeType: 2,
+        click: true
+      })
+      this.foodScroll.on('scroll', ({ x, y }) => {
         this.scrollY = Math.abs(y)
-        console.log(x, this.scrollY)
+        // console.log(x, this.scrollY)
+      })
+      this.foodScroll.on('scrollEnd', ({ x, y }) => {
+        this.scrollY = Math.abs(y)
       })
     },
+    // 初始化记录列表值
     _initTops () {
       const tops = []
       let top = 0
@@ -104,8 +122,10 @@ export default {
       this.tops = tops
       console.log(tops)
     },
-    currentIndex () {
-
+    clickMenuItem (index) {
+      const scrollY = this.tops[index]
+      this.scrollY = scrollY
+      this.foodScroll.scrollTo(0, -scrollY, 300)
     }
   }
 }

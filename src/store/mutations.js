@@ -9,47 +9,33 @@ import {
   RECEIVE_INFO
 } from './mutation-types'
 export default {
-  [RECEIVE_ADDRESS] (state, {
-    address
-  }) {
+  [RECEIVE_ADDRESS] (state, { address }) {
     // console.log(address)
     state.address = address
   },
-  [RECEIVE_CATEGORY] (state, {
-    categorys
-  }) {
+  [RECEIVE_CATEGORY] (state, { categorys }) {
     state.categorys = categorys
   },
-  [RECEIVE_SHOPS] (state, {
-    shops
-  }) {
+  [RECEIVE_SHOPS] (state, { shops }) {
     // console.log(shops)
     state.shops = shops
   },
-  [RECEIVE_USER_INFO] (state, {
-    userInfo
-  }) {
+  [RECEIVE_USER_INFO] (state, { userInfo }) {
     state.userInfo = userInfo
   },
   [RESET_USER_INFO] (state) {
     console.log('RESET_USER_INFO')
     state.userInfo = {}
   },
-  [RECEIVE_GOODS] (state, {
-    goods
-  }) {
+  [RECEIVE_GOODS] (state, { goods }) {
     // console.log(goods)
     state.goods = goods
   },
-  [RECEIVE_RATINGS] (state, {
-    ratings
-  }) {
+  [RECEIVE_RATINGS] (state, { ratings }) {
     // console.log(ratings)
     state.ratings = ratings
   },
-  [RECEIVE_INFO] (state, {
-    info
-  }) {
+  [RECEIVE_INFO] (state, { info }) {
     // console.log(info)
     state.info = info
   }
