@@ -6,8 +6,11 @@ import {
   RESET_USER_INFO,
   RECEIVE_GOODS,
   RECEIVE_RATINGS,
-  RECEIVE_INFO
+  RECEIVE_INFO,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT
 } from './mutation-types'
+import Vue from 'vue'
 export default {
   [RECEIVE_ADDRESS] (state, { address }) {
     // console.log(address)
@@ -38,5 +41,17 @@ export default {
   [RECEIVE_INFO] (state, { info }) {
     // console.log(info)
     state.info = info
+  },
+  [INCREMENT_FOOD_COUNT] (state, { food }) {
+    if (!food.count) {
+      Vue.set(food, 'count', 1)
+    } else {
+      food.count++
+    }
+  },
+  [DECREMENT_FOOD_COUNT] (state, { food }) {
+    if (food.count) {
+      food.count--
+    }
   }
 }

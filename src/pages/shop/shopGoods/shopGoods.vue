@@ -7,7 +7,7 @@
           <li class="menu-item"
               v-for="(good, index) in goods"
               :key="index"
-              :class="{current: index===currentIndex}"
+              :class="{current: index === currentIndex}"
               @click="clickMenuItem(index)">
             <span class="text bottom-border-1px">
               <img class="icon"
@@ -27,8 +27,7 @@
             <ul>
               <li class="food-item bottom-border-1px"
                   v-for="(food, index) in good.foods"
-                  :key="index"
-                  @click="showFood(food)">
+                  :key="index">
                 <div class="icon">
                   <img width="57"
                        height="57"
@@ -46,7 +45,9 @@
                     <span class="old"
                           v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
-                  <div class="cartcontrol-wrapper">购物车</div>
+                  <div class="cartcontrol-wrapper">
+                    <CarControl :food=food />
+                  </div>
                 </div>
               </li>
             </ul>
@@ -59,8 +60,12 @@
 <script>
 import { mapState } from 'vuex'
 import BScroll from 'better-scroll'
+import CarControl from '../../../components/CarControl/CarControl'
 export default {
   name: 'shopGoods',
+  components: {
+    CarControl
+  },
   data () {
     return {
       scrollY: 0,
@@ -86,8 +91,7 @@ export default {
         // scrollY>=当前top && scrollY<下一个top
         return scrollY >= top && scrollY < tops[index + 1]
       })
-      // 返回结果
-      // console.log(index)
+
       return index
     }
   },
