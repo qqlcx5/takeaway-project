@@ -4,7 +4,7 @@
          :style="{backgroundImage: `url(${info.bgImg})`}">
       <a class="back"
          @click="$router.back()">
-        <i class="iconfont icon-arrow_left"></i>
+        <i class="iconfont icon-ziyuan"></i>
       </a>
     </nav>
     <div class="shop-content"
@@ -172,7 +172,7 @@ export default {
       position absolute
       top 10px
       left 0
-      .icon-arrow_left
+      .icon-ziyuan
         display block
         padding 5px
         font-size 20px

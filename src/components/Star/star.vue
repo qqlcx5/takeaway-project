@@ -4,7 +4,8 @@
     <span class="star-item"
           :class="sc"
           v-for="(sc,index) in starClasses"
-          :key="index"></span>
+          :key="index">
+    </span>
   </div>
 </template>
 

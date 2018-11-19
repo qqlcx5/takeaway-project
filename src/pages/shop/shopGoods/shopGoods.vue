@@ -27,7 +27,8 @@
             <ul>
               <li class="food-item bottom-border-1px"
                   v-for="(food, index) in good.foods"
-                  :key="index">
+                  :key="index"
+                  @click.stop="showGood(food)">
                 <div class="icon">
                   <img width="57"
                        height="57"
@@ -54,6 +55,8 @@
           </li>
         </ul>
       </div>
+      <food ref="food"
+            :food=food></food>
     </div>
   </div>
 </template>
@@ -61,15 +64,18 @@
 import { mapState } from 'vuex'
 import BScroll from 'better-scroll'
 import CarControl from '../../../components/CarControl/CarControl'
+import Food from '../../../components/Food/Food'
 export default {
   name: 'shopGoods',
   components: {
-    CarControl
+    CarControl,
+    Food
   },
   data () {
     return {
       scrollY: 0,
-      tops: []
+      tops: [],
+      food: {}
     }
   },
   mounted () {
@@ -130,6 +136,13 @@ export default {
       const scrollY = this.tops[index]
       this.scrollY = scrollY
       this.foodScroll.scrollTo(0, -scrollY, 300)
+    },
+    // 显示列表详情页
+    showGood (food) {
+      // 设置数据
+      this.food = food
+      // 开关列表详情页
+      this.$refs.food.toggleShow()
     }
   }
 }
