@@ -19,7 +19,7 @@
         <div class="content-right">
           <div class="pay"
                :class="payClass">
-            <!-- {{payText}} -->payText
+            {{payText}}
           </div>
         </div>
       </div>
@@ -54,15 +54,18 @@
 </template>
 
 <script>
+import CartControl from '../../components/CarControl/CarControl'
 import {mapState, mapGetters} from 'vuex'
 export default {
   name: 'name',
-  components: {},
+  components: {
+    CartControl
+  },
   data () {
     return {
       isShow: false,
-      listShow: false,
-      payClass: false
+      listShow: false
+
     }
   },
   methods: {
@@ -76,7 +79,23 @@ export default {
   watch: {},
   computed: {
     ...mapState(['cartFoods', 'info']),
-    ...mapGetters(['totalCount', 'totalPrice'])
+    ...mapGetters(['totalCount', 'totalPrice']),
+    payClass () {
+      const {totalPrice} = this
+      const {minPrice} = this.info
+      return totalPrice >= minPrice ? 'enough' : 'not-enough'
+    },
+    payText () {
+      const {totalPrice} = this
+      const {minPrice} = this.info
+      if (totalPrice === 0) {
+        return `￥${minPrice}元起送`
+      } else if (minPrice > totalPrice) {
+        return `￥${minPrice - totalPrice}元起送`
+      } else {
+        return '结算'
+      }
+    }
   },
   created () {},
   mounted () {}
