@@ -2,7 +2,8 @@
   <div>
     <div class="shopcart">
       <div class="content">
-        <div class="content-left">
+        <div class="content-left"
+             @click="toggleShow">
           <div class="logo-wrapper">
             <div class="logo"
                  :class="{highlight: totalCount}">
@@ -49,7 +50,8 @@
 
     </div>
     <div class="list-mask"
-         v-show="listShow"></div>
+         v-show="listShow"
+         @click="toggleShow()"></div>
   </div>
 </template>
 
@@ -63,14 +65,14 @@ export default {
   },
   data () {
     return {
-      isShow: false,
-      listShow: false
-
+      isShow: false
     }
   },
   methods: {
     toggleShow () {
-
+      if (this.totalCount > 0) {
+        this.isShow = !this.isShow
+      }
     },
     clearCart () {
 
@@ -94,6 +96,12 @@ export default {
         return `￥${minPrice - totalPrice}元起送`
       } else {
         return '结算'
+      }
+    },
+    listShow () {
+      if (this.totalCount === 0) return false
+      else {
+        return this.isShow
       }
     }
   },
