@@ -8,7 +8,8 @@ import {
   RECEIVE_RATINGS,
   RECEIVE_INFO,
   INCREMENT_FOOD_COUNT,
-  DECREMENT_FOOD_COUNT
+  DECREMENT_FOOD_COUNT,
+  CLEARCART
 } from './mutation-types'
 import {
   // 请求地址
@@ -96,5 +97,8 @@ export default {
     } else {
       commit(DECREMENT_FOOD_COUNT, { food })
     }
+  },
+  clearCart ({ commit }) {
+    commit(CLEARCART)
   }
 }

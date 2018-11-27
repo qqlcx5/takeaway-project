@@ -56,8 +56,10 @@
 </template>
 
 <script>
+import BScroll from 'better-scroll'
+import { MessageBox } from 'mint-ui'
 import CartControl from '../../components/CarControl/CarControl'
-import {mapState, mapGetters} from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'name',
   components: {
@@ -75,7 +77,12 @@ export default {
       }
     },
     clearCart () {
+      MessageBox.confirm('确定清空购物车?').then(action => {
+        this.$store.dispatch('clearCart')
+      },
+      action => {
 
+      })
     }
   },
   watch: {},
@@ -83,13 +90,13 @@ export default {
     ...mapState(['cartFoods', 'info']),
     ...mapGetters(['totalCount', 'totalPrice']),
     payClass () {
-      const {totalPrice} = this
-      const {minPrice} = this.info
+      const { totalPrice } = this
+      const { minPrice } = this.info
       return totalPrice >= minPrice ? 'enough' : 'not-enough'
     },
     payText () {
-      const {totalPrice} = this
-      const {minPrice} = this.info
+      const { totalPrice } = this
+      const { minPrice } = this.info
       if (totalPrice === 0) {
         return `￥${minPrice}元起送`
       } else if (minPrice > totalPrice) {
@@ -99,14 +106,30 @@ export default {
       }
     },
     listShow () {
-      if (this.totalCount === 0) return false
-      else {
-        return this.isShow
+      // 如果总数量为0, 直接不显示
+      if (this.totalCount === 0) {
+        this.isShow = false
+        return false
       }
+
+      if (this.isShow) {
+        this.$nextTick(() => {
+          // 实现BScroll的实例是一个单例
+          if (!this.scroll) {
+            this.scroll = new BScroll('.list-content', {
+              click: true
+            })
+          } else {
+            this.scroll.refresh() // 让滚动条刷新一下: 重新统计内容的高度
+          }
+        })
+      }
+
+      return this.isShow
     }
   },
-  created () {},
-  mounted () {}
+  created () { },
+  mounted () { }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
@@ -215,7 +238,7 @@ export default {
     position absolute
     left 0
     top 0
-    z-index -1
+    z-index -1 // 购物车列表会层叠购物车
     width 100%
     transform translateY(-100%)
     &.move-enter-active, &.move-leave-active

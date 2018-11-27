@@ -51,10 +51,8 @@
       </div>
       <shop-list :shops="shops"></shop-list>
     </div>
-
   </section>
 </template>
-
 <script>
 import HeaderTop from '@/components/HeaderTop/HeaderTop'
 import shopList from '@/components/shopList/shopList'
@@ -66,7 +64,6 @@ export default {
   components: {
     HeaderTop,
     shopList
-
   },
   computed: {
     ...mapState(['address', 'categorys', 'shops', 'userInfo']),
@@ -95,7 +92,7 @@ export default {
   watch: {
     categorysArr (value) {
       // setTimeout(() => {
-      //   new Swiper('.swiper-container', {
+      //   new Swiper('.swiper-container',
       //     loop: true,
       //     pagination: {
       //       el: '.swiper-pagination'

@@ -8,7 +8,8 @@ import {
   RECEIVE_RATINGS,
   RECEIVE_INFO,
   INCREMENT_FOOD_COUNT,
-  DECREMENT_FOOD_COUNT
+  DECREMENT_FOOD_COUNT,
+  CLEARCART
 } from './mutation-types'
 import Vue from 'vue'
 export default {
@@ -58,5 +59,11 @@ export default {
         state.cartFoods.splice(state.cartFoods.indexOf(food), 1)
       }
     }
+  },
+  [CLEARCART] (state) {
+    state.cartFoods.forEach(element => {
+      element.count = 0
+    })
+    state.cartFoods = []
   }
 }

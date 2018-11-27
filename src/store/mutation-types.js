@@ -11,3 +11,4 @@ export const RECEIVE_INFO = 'receive_info'
 // 添加数量到购物车
 export const INCREMENT_FOOD_COUNT = 'increment_food_count'
 export const DECREMENT_FOOD_COUNT = 'decrement_food_count'
+export const CLEARCART = 'clearCart'
