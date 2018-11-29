@@ -77,11 +77,12 @@ export default {
       cb && cb()
     }
   },
-  async getShopRatings ({ commit }) {
+  async getShopRatings ({ commit }, cb) {
     const result = await reqShopRatings()
     if (result.code === 0) {
       const ratings = result.data
       commit(RECEIVE_RATINGS, { ratings })
+      cb && cb()
     }
   },
   async getShopInfo ({ commit }) {

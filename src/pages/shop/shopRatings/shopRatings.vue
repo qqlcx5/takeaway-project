@@ -51,7 +51,7 @@
         <div class="switch"
              :class="{on: onlyShowText}"
              @click="toggleOnlyShowText">
-          <span class="iconfont icon-check_circle"></span>
+          <span class="iconfont icon-roundcheckfill"></span>
           <span class="text">只看有内容的评价</span>
         </div>
       </div>
@@ -59,7 +59,7 @@
       <div class="rating-wrapper">
         <ul>
           <li class="rating-item"
-              v-for="(rating, index) in filterRatings"
+              v-for="(rating, index) in ratings"
               :key="index">
             <div class="avatar">
               <img width="28"
@@ -76,12 +76,12 @@
               <p class="text">{{rating.text}}</p>
               <div class="recommend">
                 <span class="iconfont"
-                      :class="rating.rateType===0 ? 'icon-thumb_up' : 'icon-thumb_down'"></span>
+                      :class="rating.rateType===0 ? 'icon-dianzan' : 'icon-fandui'"></span>
                 <span class="item"
                       v-for="(item, index) in rating.recommend"
                       :key="index">{{item}}</span>
               </div>
-              <div class="time">{{rating.rateTime | date-format}}</div>
+              <div class="time">{{rating.rateTime}}</div>
             </div>
           </li>
         </ul>
@@ -90,8 +90,9 @@
   </div>
 </template>
 <script>
-import Star from '../../../components/Star/star'
-
+import Star from '@/components/Star/star'
+import { mapState } from 'vuex'
+import BScroll from 'better-scroll'
 export default {
   name: 'shopRatings',
   data () {
@@ -101,13 +102,29 @@ export default {
     }
   },
   mounted () {
+    this.$store.dispatch('getShopRatings', () => {
+      this.$nextTick(() => {
+        this.BScroll = new BScroll(this.$refs.ratings, {
+          click: true
+        })
+      })
+    })
   },
 
   computed: {
+    ...mapState(['info', 'ratings'])
   },
 
   methods: {
+    setSelectType () {
 
+    },
+    positiveSize () {
+
+    },
+    toggleOnlyShowText () {
+
+    }
   },
 
   components: {
@@ -220,9 +237,9 @@ export default {
       color rgb(147, 153, 159)
       font-size 0
       &.on
-        .icon-check_circle
+        .icon-roundcheckfill
           color $green
-      .icon-check_circle
+      .icon-roundcheckfill
         display inline-block
         vertical-align top
         margin-right 4px
@@ -272,13 +289,13 @@ export default {
         .recommend
           line-height 16px
           font-size 0
-          .icon-thumb_up, .icon-thumb_down, .item
+          .icon-dianzan, .icon-fandui, .item
             display inline-block
             margin 0 8px 4px 0
             font-size 9px
-          .icon-thumb_up
+          .icon-dianzan
             color $yellow
-          .icon-thumb_down
+          .icon-fandui
             color rgb(147, 153, 159)
           .item
             padding 0 6px
