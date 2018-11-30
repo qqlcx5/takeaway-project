@@ -59,7 +59,7 @@
       <div class="rating-wrapper">
         <ul>
           <li class="rating-item"
-              v-for="(rating, index) in ratings"
+              v-for="(rating, index) in filterRatings"
               :key="index">
             <div class="avatar">
               <img width="28"
@@ -91,13 +91,14 @@
 </template>
 <script>
 import Star from '@/components/Star/star'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
+
 import BScroll from 'better-scroll'
 export default {
   name: 'shopRatings',
   data () {
     return {
-      onlyShowText: true, // 是否只显示有文本的
+      onlyShowText: false, // 是否只显示有文本的
       selectType: 2 // 选择的评价类型: 0满意, 1不满意, 2全部
     }
   },
@@ -112,18 +113,23 @@ export default {
   },
 
   computed: {
-    ...mapState(['info', 'ratings'])
+    ...mapState(['info', 'ratings']),
+    ...mapGetters(['positiveSize']),
+    filterRatings () {
+      const { ratings, selectType, onlyShowText } = this
+      return ratings.filter(rating => {
+        const { rateType, text } = rating
+        return (selectType === 2 || selectType === rateType) && (!onlyShowText || text.length > 0)
+      })
+    }
   },
 
   methods: {
-    setSelectType () {
-
-    },
-    positiveSize () {
-
+    setSelectType (selectType) {
+      this.selectType = selectType
     },
     toggleOnlyShowText () {
-
+      this.onlyShowText = !this.onlyShowText
     }
   },
 
