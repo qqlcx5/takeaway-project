@@ -63,7 +63,7 @@ export default {
   },
   data () {
     return {
-      baseImgUrl: 'http://p4ygml8h5.bkt.clouddn.com/'
+      baseImgUrl: 'https://i.loli.net/'
     }
   },
   components: {

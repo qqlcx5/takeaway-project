@@ -116,14 +116,13 @@ export default {
   },
   computed: {
     rightPhone () {
-      const testphone = /^1\d{10}$/.test(this.phone)
-      console.log(testphone)
-      return testphone
+      const isPhone = /^1\d{10}$/.test(this.phone)
+      // console.log(isPhone)
+      return isPhone
     }
 
   },
   methods: {
-
     async getCode () {
       // 定时器
       if (!this.computeTime) {
