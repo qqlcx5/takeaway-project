@@ -77,10 +77,10 @@ export default {
 
   mounted () {
     // 如果数据还没有, 直接结束
+    console.log('xxx')
     if (!this.info.pics) {
       return
     }
-
     // 数据有了, 可以创建BScroll对象形成滑动
     this._initScroll()
   },

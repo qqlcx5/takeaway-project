@@ -9,41 +9,58 @@ import {
   RECEIVE_INFO,
   INCREMENT_FOOD_COUNT,
   DECREMENT_FOOD_COUNT,
-  CLEARCART
+  CLEARCART,
+  RECEIVE_SEARCH_SHOPS
 } from './mutation-types'
 import Vue from 'vue'
 export default {
-  [RECEIVE_ADDRESS] (state, { address }) {
+  [RECEIVE_ADDRESS] (state, {
+    address
+  }) {
     // console.log(address)
     state.address = address
   },
-  [RECEIVE_CATEGORY] (state, { categorys }) {
+  [RECEIVE_CATEGORY] (state, {
+    categorys
+  }) {
     state.categorys = categorys
   },
-  [RECEIVE_SHOPS] (state, { shops }) {
+  [RECEIVE_SHOPS] (state, {
+    shops
+  }) {
     // console.log(shops)
     state.shops = shops
   },
-  [RECEIVE_USER_INFO] (state, { userInfo }) {
+  [RECEIVE_USER_INFO] (state, {
+    userInfo
+  }) {
     state.userInfo = userInfo
   },
   [RESET_USER_INFO] (state) {
     console.log('RESET_USER_INFO')
     state.userInfo = {}
   },
-  [RECEIVE_GOODS] (state, { goods }) {
+  [RECEIVE_GOODS] (state, {
+    goods
+  }) {
     // console.log(goods)
     state.goods = goods
   },
-  [RECEIVE_RATINGS] (state, { ratings }) {
+  [RECEIVE_RATINGS] (state, {
+    ratings
+  }) {
     // console.log(ratings)
     state.ratings = ratings
   },
-  [RECEIVE_INFO] (state, { info }) {
+  [RECEIVE_INFO] (state, {
+    info
+  }) {
     // console.log(info)
     state.info = info
   },
-  [INCREMENT_FOOD_COUNT] (state, { food }) {
+  [INCREMENT_FOOD_COUNT] (state, {
+    food
+  }) {
     if (!food.count) {
       Vue.set(food, 'count', 1)
       // 将food添加到cartFoods中
@@ -52,7 +69,9 @@ export default {
       food.count++
     }
   },
-  [DECREMENT_FOOD_COUNT] (state, { food }) {
+  [DECREMENT_FOOD_COUNT] (state, {
+    food
+  }) {
     if (food.count) {
       food.count--
       if (food.count === 0) {
@@ -65,5 +84,11 @@ export default {
       element.count = 0
     })
     state.cartFoods = []
+  },
+  // 接收搜索的商家数组
+  [RECEIVE_SEARCH_SHOPS] (state, {
+    searchShops
+  }) {
+    state.searchShops = searchShops
   }
 }

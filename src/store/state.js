@@ -8,5 +8,6 @@ export default {
   goods: [],
   ratings: [],
   info: {},
-  cartFoods: [] // 购物车列表
+  cartFoods: [], // 购物车列表
+  searchShops: []
 }
