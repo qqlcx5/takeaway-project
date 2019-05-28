@@ -81,7 +81,7 @@
                       v-for="(item, index) in rating.recommend"
                       :key="index">{{item}}</span>
               </div>
-              <div class="time">{{rating.rateTime}}</div>
+              <div class="time">{{rating.rateTime | day-js}}</div>
             </div>
           </li>
         </ul>

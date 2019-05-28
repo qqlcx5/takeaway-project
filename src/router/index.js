@@ -8,10 +8,13 @@ import search from '@/pages/search/search'
 import login from '@/pages/login/login'
 import userinfo from '@/pages/profile/userinfo'
 import shop from '@/pages/shop/shop'
-import shopGoods from '@/pages/shop/shopGoods/shopGoods'
-import shopRatings from '@/pages/shop/shopRatings/shopRatings'
-import shopInfo from '@/pages/shop/shopInfo/shopInfo'
 
+// import shopGoods from '@/pages/shop/shopGoods/shopGoods'
+// import shopRatings from '@/pages/shop/shopRatings/shopRatings'
+// import shopInfo from '@/pages/shop/shopInfo/shopInfo'
+const shopGoods = () => import('@/pages/shop/shopGoods/shopGoods')
+const shopRatings = () => import('@/pages/shop/shopRatings/shopRatings')
+const shopInfo = () => import('@/pages/shop/shopInfo/shopInfo')
 Vue.use(Router)
 
 export default new Router({

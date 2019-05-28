@@ -8,12 +8,18 @@ import store from './store'
 import './mock/mockServer'
 // 全局引入mint-UI的按钮
 import 'mint-ui/lib/style.css'
+import VueLazyload from 'vue-lazyload'
+import loading from '@/common/imgs/loading.gif'
 import {
   Button
 } from 'mint-ui'
+import './filters'
+
 Vue.component(Button.name, Button)
 Vue.config.productionTip = false // 阻止 vue 在启动时生成生产提示
-
+Vue.use(VueLazyload, {
+  loading
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
