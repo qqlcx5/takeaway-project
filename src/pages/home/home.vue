@@ -2,20 +2,30 @@
   <section class="msite">
     <!--首页头部-->
     <HeaderTop :title="address.name">
-      <span class="header_search"
-            slot="left"
-            @click="$router.push('/search')">
+      <span class="header_search" slot="left" @click="$router.push('/search')">
         <i class="iconfont icon-sousuo1"></i>
       </span>
       <router-link class="header_login"
                    :to="{name: userInfo._id? 'userinfo':'login'}"
                    slot="right">
         <span class="header_login_text"
-              v-if="!userInfo._id">登录|注册</span>
+              v-if="!userInfo._id">登录|注册
+        </span>
         <span class="header_login_text"
               v-else> <i class="iconfont icon-zhanghao"></i></span>
       </router-link>
+
     </HeaderTop>
+    <!-- HeaderTop -->
+    <template>
+      <header class="header">
+        <slot name="left"></slot>
+        <span class="header_title">
+          <span class="header_title_text ellipsis">{{title}}</span>
+        </span>
+        <slot name="right"></slot>
+      </header>
+    </template>
     <!--首页导航-->
     <nav class="msite_nav">
       <div class="swiper-container"
