@@ -2,19 +2,18 @@
   <section class="msite">
     <!--首页头部-->
     <HeaderTop :title="address.name">
-      <span class="header_search"
-            slot="left"
-            @click="$router.push('/search')">
+      <span class="header_search" slot="left" @click="$router.push('/search')">
         <i class="iconfont icon-sousuo1"></i>
       </span>
-      <router-link class="header_login"
-                   :to="{ name: userInfo._id ? 'userinfo' : 'login' }"
-                   slot="right">
-        <span class="header_login_text"
-              v-if="!userInfo._id">登录|注册 </span>
-        <span class="header_login_text"
-              v-else>
-          <i class="iconfont icon-zhanghao"></i></span>
+      <router-link
+        class="header_login"
+        :to="{ name: userInfo._id ? 'userinfo' : 'login' }"
+        slot="right"
+      >
+        <span class="header_login_text" v-if="!userInfo._id">登录|注册 </span>
+        <span class="header_login_text" v-else>
+          <i class="iconfont icon-zhanghao"></i
+        ></span>
       </router-link>
     </HeaderTop>
     <!-- HeaderTop -->
@@ -29,16 +28,19 @@
     </template>
     <!--首页导航-->
     <nav class="msite_nav">
-      <div class="swiper-container"
-           v-if="categorysArr.length">
+      <div class="swiper-container" v-if="categorysArr.length">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"
-               v-for="(categorys, index) in categorysArr"
-               :key="index">
-            <a href="javascript:"
-               class="link_to_food"
-               v-for="(category, index) in categorys"
-               :key="index">
+          <div
+            class="swiper-slide"
+            v-for="(categorys, index) in categorysArr"
+            :key="index"
+          >
+            <a
+              href="javascript:"
+              class="link_to_food"
+              v-for="(category, index) in categorys"
+              :key="index"
+            >
               <div class="food_container">
                 <img :src="baseImageUrl + category.image_url" />
               </div>
@@ -50,8 +52,7 @@
         <div class="swiper-pagination"></div>
       </div>
       <div v-else>
-        <img src="./images/msite_back.svg"
-             alt="" />
+        <img src="./images/msite_back.svg" alt="" />
       </div>
     </nav>
     <!--首页附近商家-->
@@ -78,7 +79,7 @@ export default {
   },
   computed: {
     ...mapState(["address", "categorys", "shops", "userInfo"]),
-    categorysArr () {
+    categorysArr() {
       const { categorys } = this;
       const arr = [];
       let minArr = [];
@@ -94,14 +95,14 @@ export default {
       return arr;
     }
   },
-  async mounted () {
+  async mounted() {
     // this.$store.dispatch('getAddress')
     this.getAddress();
     this.getCategory();
     this.getShops();
   },
   watch: {
-    categorysArr () {
+    categorysArr() {
       // setTimeout(() => {
       //   new Swiper('.swiper-container',
       //     loop: true,
@@ -123,7 +124,7 @@ export default {
   methods: {
     ...mapActions(["getAddress", "getCategory", "getShops"])
   },
-  data () {
+  data() {
     return {
       title: "",
       baseImageUrl: "https://fuss10.elemecdn.com" // icon图片基础路径

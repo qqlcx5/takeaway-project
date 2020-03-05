@@ -6,9 +6,11 @@
         <div class="delivery">
           <div>
             <span class="delivery-icon">{{ info.description }}</span>
-            <span>由商家配送提供配送，约{{ info.deliveryTime }}分钟送达，距离{{
+            <span
+              >由商家配送提供配送，约{{ info.deliveryTime }}分钟送达，距离{{
                 info.distance
-              }}</span>
+              }}</span
+            >
           </div>
           <div class="delivery-money">配送费￥{{ info.deliveryPrice }}</div>
         </div>
@@ -18,10 +20,12 @@
       <section class="section">
         <h3 class="section-title">活动与服务</h3>
         <div class="activity">
-          <div class="activity-item"
-               v-for="(support, index) in info.supports"
-               :key="index"
-               :class="supportClasses[support.type]">
+          <div
+            class="activity-item"
+            v-for="(support, index) in info.supports"
+            :key="index"
+            :class="supportClasses[support.type]"
+          >
             <span class="content-tag">
               <span class="mini-tag">{{ support.name }}</span>
             </span>
@@ -35,14 +39,9 @@
       <section class="section">
         <h3 class="section-title">商家实景</h3>
         <div class="pic-wrapper">
-          <ul class="pic-list"
-              ref="picsUl">
-            <li class="pic-item"
-                v-for="(pic, index) in info.pics"
-                :key="index">
-              <img width="120"
-                   height="90"
-                   :src="pic" />
+          <ul class="pic-list" ref="picsUl">
+            <li class="pic-item" v-for="(pic, index) in info.pics" :key="index">
+              <img width="120" height="90" :src="pic" />
             </li>
           </ul>
         </div>
@@ -75,7 +74,7 @@
 import BScroll from "better-scroll";
 import { mapState } from "vuex";
 export default {
-  data () {
+  data() {
     return {
       supportClasses: ["activity-green", "activity-red", "activity-orange"]
     };
@@ -84,7 +83,7 @@ export default {
     ...mapState(["info"])
   },
 
-  mounted () {
+  mounted() {
     // 如果数据还没有, 直接结束
     console.log("xxx");
     if (!this.info.pics) {
@@ -95,7 +94,7 @@ export default {
   },
 
   methods: {
-    _initScroll () {
+    _initScroll() {
       this.BScroll = new BScroll(".shop-info");
       // 动态计算ul的宽度
       const ul = this.$refs.picsUl;
@@ -110,7 +109,7 @@ export default {
   },
 
   watch: {
-    info () {
+    info() {
       // 刷新流程--> 更新数据
       this.$nextTick(() => {
         this._initScroll();

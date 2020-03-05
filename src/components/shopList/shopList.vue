@@ -1,29 +1,30 @@
 <template>
   <div class="shop_container">
-    <ul class="shop_list"
-        v-if="shops.length">
-      <li class="shop_li border-1px"
-          v-for="(shop, index) in shops"
-          :key="index"
-          @click="$router.push('/shop')">
+    <ul class="shop_list" v-if="shops.length">
+      <li
+        class="shop_li border-1px"
+        v-for="(shop, index) in shops"
+        :key="index"
+        @click="$router.push('/shop')"
+      >
         <a>
           <div class="shop_left">
-            <img class="shop_img"
-                 :src="baseImgUrl + shop.image_path" />
+            <img class="shop_img" :src="baseImgUrl + shop.image_path" />
           </div>
           <div class="shop_right">
             <section class="shop_detail_header">
               <h4 class="shop_title ellipsis">{{ shop.name }}</h4>
-              <ul class="shop_detail_ul"
-                  v-for="(support, index) in shop.supports"
-                  :key="index">
+              <ul
+                class="shop_detail_ul"
+                v-for="(support, index) in shop.supports"
+                :key="index"
+              >
                 <li class="supports">{{ support.icon_name }}</li>
               </ul>
             </section>
             <section class="shop_rating_order">
               <section class="shop_rating_order_left">
-                <star :score="shop.rating"
-                      :size="24"></star>
+                <star :score="shop.rating" :size="24"></star>
                 <div class="rating_section">
                   {{ shop.rating }}
                 </div>
@@ -49,10 +50,8 @@
       </li>
     </ul>
     <ul v-else>
-      <li v-for="item in 6"
-          :key="item">
-        <img src="./images/shop_back.svg"
-             alt="" />
+      <li v-for="item in 6" :key="item">
+        <img src="./images/shop_back.svg" alt="" />
       </li>
     </ul>
   </div>
@@ -65,7 +64,7 @@ export default {
   props: {
     shops: Array
   },
-  data () {
+  data() {
     return {
       baseImgUrl: "https://i.loli.net/"
     };

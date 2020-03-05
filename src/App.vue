@@ -13,7 +13,7 @@ export default {
   components: {
     FooterGuide
   },
-  async mounted () {
+  async mounted() {
     // this.$store.dispatch('getAddress')
     this.getUserInfo();
   },

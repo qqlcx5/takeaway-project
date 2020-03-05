@@ -4,15 +4,15 @@
       <div class="menu-wrapper">
         <ul>
           <!--current选中部分的类名-->
-          <li class="menu-item"
-              v-for="(good, index) in goods"
-              :key="index"
-              :class="{ current: index === currentIndex }"
-              @click="clickMenuItem(index)">
+          <li
+            class="menu-item"
+            v-for="(good, index) in goods"
+            :key="index"
+            :class="{ current: index === currentIndex }"
+            @click="clickMenuItem(index)"
+          >
             <span class="text bottom-border-1px">
-              <img class="icon"
-                   :src="good.icon"
-                   v-if="good.icon" />
+              <img class="icon" :src="good.icon" v-if="good.icon" />
               {{ good.name }}
             </span>
           </li>
@@ -20,19 +20,21 @@
       </div>
       <div class="foods-wrapper">
         <ul ref="foodsUl">
-          <li class="food-list-hook"
-              v-for="(good, index) in goods"
-              :key="index">
+          <li
+            class="food-list-hook"
+            v-for="(good, index) in goods"
+            :key="index"
+          >
             <h1 class="title">{{ good.name }}</h1>
             <ul>
-              <li class="food-item bottom-border-1px"
-                  v-for="(food, index) in good.foods"
-                  :key="index"
-                  @click.stop="showGood(food)">
+              <li
+                class="food-item bottom-border-1px"
+                v-for="(food, index) in good.foods"
+                :key="index"
+                @click.stop="showGood(food)"
+              >
                 <div class="icon">
-                  <img width="57"
-                       height="57"
-                       :src="food.icon" />
+                  <img width="57" height="57" :src="food.icon" />
                 </div>
                 <div class="content">
                   <h2 class="name">{{ food.name }}</h2>
@@ -43,8 +45,9 @@
                   </div>
                   <div class="price">
                     <span class="now">￥{{ food.price }}</span>
-                    <span class="old"
-                          v-if="food.oldPrice">￥{{ food.oldPrice }}</span>
+                    <span class="old" v-if="food.oldPrice"
+                      >￥{{ food.oldPrice }}</span
+                    >
                   </div>
                   <div class="cartcontrol-wrapper">
                     <CarControl :food="food" />
@@ -56,8 +59,7 @@
         </ul>
       </div>
       <shopCart />
-      <food ref="food"
-            :food="food"></food>
+      <food ref="food" :food="food"></food>
     </div>
   </div>
 </template>
@@ -74,14 +76,14 @@ export default {
     Food,
     shopCart
   },
-  data () {
+  data() {
     return {
       scrollY: 0,
       tops: [],
       food: {}
     };
   },
-  mounted () {
+  mounted() {
     this.$store.dispatch("getShopGoods", () => {
       this.$nextTick(() => {
         this._initScroll();
@@ -91,7 +93,7 @@ export default {
   },
   computed: {
     ...mapState(["goods"]),
-    currentIndex () {
+    currentIndex() {
       // 初始和相关数据发生了变化
       // 得到条件数据
       const { scrollY, tops } = this;
@@ -106,7 +108,7 @@ export default {
   },
   methods: {
     // 初始化滚动条
-    _initScroll () {
+    _initScroll() {
       this.menuScroll = new BScroll(".menu-wrapper", {
         click: true
       });
@@ -123,7 +125,7 @@ export default {
       });
     },
     // 初始化记录列表值
-    _initTops () {
+    _initTops() {
       const tops = [];
       let top = 0;
       tops.push(top);
@@ -135,13 +137,13 @@ export default {
       this.tops = tops;
       console.log(tops);
     },
-    clickMenuItem (index) {
+    clickMenuItem(index) {
       const scrollY = this.tops[index];
       this.scrollY = scrollY;
       this.foodScroll.scrollTo(0, -scrollY, 300);
     },
     // 显示列表详情页
-    showGood (food) {
+    showGood(food) {
       // 设置数据
       this.food = food;
       // 开关列表详情页

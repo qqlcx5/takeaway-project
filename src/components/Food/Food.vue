@@ -1,13 +1,11 @@
 <template>
-  <div class="food"
-       v-if="isShow">
+  <div class="food" v-if="isShow">
     <div class="food-content">
       <div class="image-header">
         <img v-lazy="food.image" />
         <p class="foodpanel-desc">{{ food.info }}</p>
         <div class="back">
-          <i class="iconfont icon-ziyuan"
-             @click="toggleShow"></i>
+          <i class="iconfont icon-ziyuan" @click="toggleShow"></i>
         </div>
       </div>
       <div class="content">
@@ -18,16 +16,14 @@
         </div>
         <div class="price">
           <span class="now">￥{{ food.price }}</span>
-          <span class="old"
-                v-show="food.oldPrice">￥{{ food.oldPrice }}</span>
+          <span class="old" v-show="food.oldPrice">￥{{ food.oldPrice }}</span>
         </div>
         <div class="cartcontrol-wrapper">
           <CartControl :food="food" />
         </div>
       </div>
     </div>
-    <div class="food-cover"
-         @click="toggleShow"></div>
+    <div class="food-cover" @click="toggleShow"></div>
   </div>
 </template>
 
@@ -39,14 +35,14 @@ export default {
     food: Object
   },
 
-  data () {
+  data() {
     return {
       isShow: false
     };
   },
 
   methods: {
-    toggleShow () {
+    toggleShow() {
       this.isShow = !this.isShow;
     }
   },

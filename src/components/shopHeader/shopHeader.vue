@@ -1,16 +1,12 @@
 <template>
   <div class="shop-header">
-    <nav class="shop-nav"
-         :style="{ backgroundImage: `url(${info.bgImg})` }">
-      <a class="back"
-         @click="$router.back()">
+    <nav class="shop-nav" :style="{ backgroundImage: `url(${info.bgImg})` }">
+      <a class="back" @click="$router.back()">
         <i class="iconfont icon-ziyuan"></i>
       </a>
     </nav>
-    <div class="shop-content"
-         @click="toggleShopShow">
-      <img class="content-image"
-           :src="info.avatar" />
+    <div class="shop-content" @click="toggleShopShow">
+      <img class="content-image" :src="info.avatar" />
       <div class="header-content">
         <h2 class="content-title">
           <span class="content-tag">
@@ -31,12 +27,13 @@
       </div>
     </div>
     <!-- 异步显示数据，先显示初始数据，在显示带后台数据，处理方法用v-if -->
-    <div class="shop-header-discounts"
-         v-if="info.supports"
-         @click="toggleSupportShow">
+    <div
+      class="shop-header-discounts"
+      v-if="info.supports"
+      @click="toggleSupportShow"
+    >
       <div class="discounts-left">
-        <div class="activity"
-             :class="supportClasses[info.supports[0].type]">
+        <div class="activity" :class="supportClasses[info.supports[0].type]">
           <span class="content-tag">
             <span class="mini-tag">{{ info.supports[0].name }}</span>
           </span>
@@ -48,8 +45,7 @@
       <div class="discounts-right">{{ info.supports.length }}个优惠</div>
     </div>
     <transition name="fade">
-      <div class="shop-brief-modal"
-           v-show="shopShow">
+      <div class="shop-brief-modal" v-show="shopShow">
         <div class="brief-modal-content">
           <h2 class="content-title">
             <span class="content-tag">
@@ -85,8 +81,7 @@
           <div class="brief-modal-notice">
             {{ info.bulletin }}
           </div>
-          <div class="mask-footer"
-               @click="toggleShopShow">
+          <div class="mask-footer" @click="toggleShopShow">
             <span class="iconfont icon-guanbi"></span>
           </div>
         </div>
@@ -95,23 +90,23 @@
     </transition>
 
     <transition name="fade">
-      <div class="activity-sheet"
-           v-show="supportShow">
+      <div class="activity-sheet" v-show="supportShow">
         <div class="activity-sheet-content">
           <h2 class="activity-sheet-title">优惠活动</h2>
           <ul class="list">
-            <li class="activity-item"
-                v-for="(support, index) in info.supports"
-                :key="index"
-                :class="supportClasses[support.type]">
+            <li
+              class="activity-item"
+              v-for="(support, index) in info.supports"
+              :key="index"
+              :class="supportClasses[support.type]"
+            >
               <span class="content-tag">
                 <span class="mini-tag">{{ support.name }}</span>
               </span>
               <span class="activity-content">{{ support.content }}</span>
             </li>
           </ul>
-          <div class="activity-sheet-close"
-               @click="toggleSupportShow">
+          <div class="activity-sheet-close" @click="toggleSupportShow">
             <span class="iconfont icon-guanbi"></span>
           </div>
         </div>
@@ -124,7 +119,7 @@
 import { mapState } from "vuex";
 export default {
   name: "shopHeader",
-  data () {
+  data() {
     return {
       supportClasses: ["activity-green", "activity-red", "activity-orange"],
       shopShow: false,
@@ -136,10 +131,10 @@ export default {
   },
 
   methods: {
-    toggleShopShow () {
+    toggleShopShow() {
       this.shopShow = !this.shopShow;
     },
-    toggleSupportShow () {
+    toggleSupportShow() {
       this.supportShow = !this.supportShow;
     }
   }

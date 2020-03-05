@@ -1,10 +1,11 @@
 <template>
-  <div class="star"
-       :class="'star-' + size">
-    <span class="star-item"
-          :class="sc"
-          v-for="(sc, index) in starClasses"
-          :key="index">
+  <div class="star" :class="'star-' + size">
+    <span
+      class="star-item"
+      :class="sc"
+      v-for="(sc, index) in starClasses"
+      :key="index"
+    >
     </span>
   </div>
 </template>
@@ -20,7 +21,7 @@ export default {
     size: Number
   },
   computed: {
-    starClasses () {
+    starClasses() {
       const { score } = this;
       const starArr = [];
       const scoreInteger = Math.floor(score);
@@ -37,7 +38,7 @@ export default {
       return starArr;
     }
   },
-  data () {
+  data() {
     return {};
   }
 };

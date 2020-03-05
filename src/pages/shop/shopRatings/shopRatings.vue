@@ -1,6 +1,5 @@
 <template>
-  <div class="ratings"
-       ref="ratings">
+  <div class="ratings" ref="ratings">
     <div class="ratings-content">
       <div class="overview">
         <div class="overview-left">
@@ -11,14 +10,12 @@
         <div class="overview-right">
           <div class="score-wrapper">
             <span class="title">服务态度</span>
-            <Star :score="info.serviceScore"
-                  :size="36" />
+            <Star :score="info.serviceScore" :size="36" />
             <span class="score">{{ info.serviceScore }}</span>
           </div>
           <div class="score-wrapper">
             <span class="title">商品评分</span>
-            <Star :score="info.foodScore"
-                  :size="36" />
+            <Star :score="info.foodScore" :size="36" />
             <span class="score">{{ info.foodScore }}</span>
           </div>
           <div class="delivery-wrapper">
@@ -32,25 +29,33 @@
 
       <div class="ratingselect">
         <div class="rating-type border-1px">
-          <span class="block positive"
-                :class="{ active: selectType === 2 }"
-                @click="setSelectType(2)">
+          <span
+            class="block positive"
+            :class="{ active: selectType === 2 }"
+            @click="setSelectType(2)"
+          >
             全部<span class="count">{{ ratings.length }}</span>
           </span>
-          <span class="block positive"
-                :class="{ active: selectType === 0 }"
-                @click="setSelectType(0)">
+          <span
+            class="block positive"
+            :class="{ active: selectType === 0 }"
+            @click="setSelectType(0)"
+          >
             满意<span class="count">{{ positiveSize }}</span>
           </span>
-          <span class="block negative"
-                :class="{ active: selectType === 1 }"
-                @click="setSelectType(1)">
+          <span
+            class="block negative"
+            :class="{ active: selectType === 1 }"
+            @click="setSelectType(1)"
+          >
             不满意<span class="count">{{ ratings.length - positiveSize }}</span>
           </span>
         </div>
-        <div class="switch"
-             :class="{ on: onlyShowText }"
-             @click="toggleOnlyShowText">
+        <div
+          class="switch"
+          :class="{ on: onlyShowText }"
+          @click="toggleOnlyShowText"
+        >
           <span class="iconfont icon-roundcheckfill"></span>
           <span class="text">只看有内容的评价</span>
         </div>
@@ -58,30 +63,34 @@
 
       <div class="rating-wrapper">
         <ul>
-          <li class="rating-item"
-              v-for="(rating, index) in filterRatings"
-              :key="index">
+          <li
+            class="rating-item"
+            v-for="(rating, index) in filterRatings"
+            :key="index"
+          >
             <div class="avatar">
-              <img width="28"
-                   height="28"
-                   :src="rating.avatar" />
+              <img width="28" height="28" :src="rating.avatar" />
             </div>
             <div class="content">
               <h1 class="name">{{ rating.username }}</h1>
               <div class="star-wrapper">
-                <Star :score="rating.score"
-                      :size="24" />
+                <Star :score="rating.score" :size="24" />
                 <span class="delivery">{{ rating.deliveryTime }}</span>
               </div>
               <p class="text">{{ rating.text }}</p>
               <div class="recommend">
-                <span class="iconfont"
-                      :class="
+                <span
+                  class="iconfont"
+                  :class="
                     rating.rateType === 0 ? 'icon-dianzan' : 'icon-fandui'
-                  "></span>
-                <span class="item"
-                      v-for="(item, index) in rating.recommend"
-                      :key="index">{{ item }}</span>
+                  "
+                ></span>
+                <span
+                  class="item"
+                  v-for="(item, index) in rating.recommend"
+                  :key="index"
+                  >{{ item }}</span
+                >
               </div>
               <div class="time">{{ rating.rateTime }}</div>
             </div>
@@ -98,13 +107,13 @@ import { mapState, mapGetters } from "vuex";
 import BScroll from "better-scroll";
 export default {
   name: "shopRatings",
-  data () {
+  data() {
     return {
       onlyShowText: false, // 是否只显示有文本的
       selectType: 2 // 选择的评价类型: 0满意, 1不满意, 2全部
     };
   },
-  mounted () {
+  mounted() {
     this.$store.dispatch("getShopRatings", () => {
       this.$nextTick(() => {
         this.BScroll = new BScroll(this.$refs.ratings, {
@@ -117,7 +126,7 @@ export default {
   computed: {
     ...mapState(["info", "ratings"]),
     ...mapGetters(["positiveSize"]),
-    filterRatings () {
+    filterRatings() {
       const { ratings, selectType, onlyShowText } = this;
       return ratings.filter(rating => {
         const { rateType, text } = rating;
@@ -130,10 +139,10 @@ export default {
   },
 
   methods: {
-    setSelectType (selectType) {
+    setSelectType(selectType) {
       this.selectType = selectType;
     },
-    toggleOnlyShowText () {
+    toggleOnlyShowText() {
       this.onlyShowText = !this.onlyShowText;
     }
   },

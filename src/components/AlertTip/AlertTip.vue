@@ -6,8 +6,7 @@
         <span></span>
       </div>
       <p class="tip_text">{{ alertText }}</p>
-      <div class="confrim"
-           @click="closeTip">确认</div>
+      <div class="confrim" @click="closeTip">确认</div>
     </section>
   </div>
 </template>
@@ -19,7 +18,7 @@ export default {
   },
 
   methods: {
-    closeTip () {
+    closeTip() {
       // 分发自定义事件(事件名: closeTip)
       this.$emit("closeTip");
     }

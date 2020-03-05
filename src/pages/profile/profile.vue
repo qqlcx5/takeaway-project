@@ -2,14 +2,15 @@
   <section class="profile">
     <header-top title="我的"></header-top>
     <section class="profile-number">
-      <router-link class="profile-link"
-                   :to="{ name: userInfo._id ? 'userinfo' : 'login' }">
+      <router-link
+        class="profile-link"
+        :to="{ name: userInfo._id ? 'userinfo' : 'login' }"
+      >
         <div class="profile_image">
           <i class="iconfont icon-yonghu-tianchong"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top"
-             v-show="!userInfo.phone">
+          <p class="user-info-top" v-show="!userInfo.phone">
             {{ userInfo.name || "登录/注册" }}
           </p>
           <p>
@@ -28,18 +29,15 @@
     </section>
     <section class="profile_info_data border-1px">
       <ul class="info_data_list">
-        <a href="javascript:"
-           class="info_data_link">
+        <a href="javascript:" class="info_data_link">
           <span class="info_data_top"><span>0.00</span>元</span>
           <span class="info_data_bottom">我的余额</span>
         </a>
-        <a href="javascript:"
-           class="info_data_link">
+        <a href="javascript:" class="info_data_link">
           <span class="info_data_top"><span>0</span>个</span>
           <span class="info_data_bottom">我的优惠</span>
         </a>
-        <a href="javascript:"
-           class="info_data_link">
+        <a href="javascript:" class="info_data_link">
           <span class="info_data_top"><span>0</span>分</span>
           <span class="info_data_bottom">我的积分</span>
         </a>
@@ -47,8 +45,7 @@
     </section>
     <section class="profile_my_order border-1px">
       <!-- 我的订单 -->
-      <a href="javascript:"
-         class="my_order">
+      <a href="javascript:" class="my_order">
         <span>
           <i class="iconfont icon-order"></i>
         </span>
@@ -60,8 +57,7 @@
         </div>
       </a>
       <!-- 积分商城 -->
-      <a href="javascript:"
-         class="my_order">
+      <a href="javascript:" class="my_order">
         <span>
           <i class="iconfont icon-xingzhuang"></i>
         </span>
@@ -73,8 +69,7 @@
         </div>
       </a>
       <!-- 硅谷外卖会员卡 -->
-      <a href="javascript:"
-         class="my_order">
+      <a href="javascript:" class="my_order">
         <span>
           <i class="iconfont icon-huiyuanqia"></i>
         </span>
@@ -85,8 +80,7 @@
           </span>
         </div>
       </a>
-      <a href="javascript:"
-         class="my_order">
+      <a href="javascript:" class="my_order">
         <span>
           <i class="iconfont icon-chengshi"></i>
         </span>
@@ -100,10 +94,13 @@
     </section>
     <section class="profile_my_order border-1px">
       <!-- 服务中心 -->
-      <mt-button type="danger"
-                 style="width:100%"
-                 @click="logout"
-                 v-show="userInfo._id">退出登陆</mt-button>
+      <mt-button
+        type="danger"
+        style="width:100%"
+        @click="logout"
+        v-show="userInfo._id"
+        >退出登陆</mt-button
+      >
     </section>
   </section>
 </template>
@@ -122,7 +119,7 @@ export default {
     ...mapState(["userInfo"])
   },
   methods: {
-    logout () {
+    logout() {
       MessageBox.confirm("确定执行此操作?").then(
         () => {
           this.$store.dispatch("getLogout");
@@ -136,7 +133,7 @@ export default {
       );
     }
   },
-  data () {
+  data() {
     return {};
   }
 };

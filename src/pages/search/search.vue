@@ -1,29 +1,28 @@
 <template>
   <section class="search">
     <header-top title="搜索"></header-top>
-    <form class="search_form"
-          @click.prevent="search">
-      <input type="search"
-             name="search"
-             placeholder="请输入商家或美食名称"
-             class="search_input"
-             v-model="keyword" />
-      <input type="submit"
-             name="submit"
-             class="search_submit" />
+    <form class="search_form" @click.prevent="search">
+      <input
+        type="search"
+        name="search"
+        placeholder="请输入商家或美食名称"
+        class="search_input"
+        v-model="keyword"
+      />
+      <input type="submit" name="submit" class="search_submit" />
     </form>
-    <section class="list"
-             v-if="noSearchShops">
+    <section class="list" v-if="noSearchShops">
       <ul class="list_container">
         <!--:to="'/shop?id='+item.id"-->
-        <router-link :to="{ path: '/shop', query: { id: item.id } }"
-                     tag="li"
-                     v-for="item in searchShops"
-                     :key="item.id"
-                     class="list_li">
+        <router-link
+          :to="{ path: '/shop', query: { id: item.id } }"
+          tag="li"
+          v-for="item in searchShops"
+          :key="item.id"
+          class="list_li"
+        >
           <section class="item_left">
-            <img :src="imgBaseUrl + item.image_path"
-                 class="restaurant_img" />
+            <img :src="imgBaseUrl + item.image_path" class="restaurant_img" />
           </section>
           <section class="item_right">
             <div class="item_right_text">
@@ -40,8 +39,7 @@
         </router-link>
       </ul>
     </section>
-    <div class="search_none"
-         v-else>很抱歉！无搜索结果</div>
+    <div class="search_none" v-else>很抱歉！无搜索结果</div>
   </section>
 </template>
 
@@ -53,7 +51,7 @@ export default {
   components: {
     HeaderTop
   },
-  data () {
+  data() {
     return {
       keyword: "",
       imgBaseUrl: "http://cangdu.org:8001/img/",
@@ -64,7 +62,7 @@ export default {
     ...mapState(["searchShops"])
   },
   methods: {
-    search () {
+    search() {
       // 得到搜索关键字
       const keyword = this.keyword.trim();
       if (keyword) {
@@ -73,7 +71,7 @@ export default {
     }
   },
   watch: {
-    searchShops (value) {
+    searchShops(value) {
       value.length > 0
         ? (this.noSearchShops = true)
         : (this.noSearchShops = false);

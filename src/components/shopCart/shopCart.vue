@@ -2,43 +2,36 @@
   <div>
     <div class="shopcart">
       <div class="content">
-        <div class="content-left"
-             @click="toggleShow">
+        <div class="content-left" @click="toggleShow">
           <div class="logo-wrapper">
-            <div class="logo"
-                 :class="{ highlight: totalCount }">
-              <i class="iconfont icon-gouwuche"
-                 :class="{ highlight: totalCount }"></i>
+            <div class="logo" :class="{ highlight: totalCount }">
+              <i
+                class="iconfont icon-gouwuche"
+                :class="{ highlight: totalCount }"
+              ></i>
             </div>
-            <div class="num"
-                 v-if="totalCount">{{ totalCount }}</div>
+            <div class="num" v-if="totalCount">{{ totalCount }}</div>
           </div>
-          <div class="price"
-               :class="{ highlight: totalCount }">
+          <div class="price" :class="{ highlight: totalCount }">
             ￥{{ totalPrice }}
           </div>
           <div class="desc">另需配送费￥{{ info.deliveryPrice }}元</div>
         </div>
         <div class="content-right">
-          <div class="pay"
-               :class="payClass">
+          <div class="pay" :class="payClass">
             {{ payText }}
           </div>
         </div>
       </div>
       <transition name="move">
-        <div class="shopcart-list"
-             v-show="listShow">
+        <div class="shopcart-list" v-show="listShow">
           <div class="list-header">
             <h1 class="title">购物车</h1>
-            <span class="empty"
-                  @click="clearCart">清空</span>
+            <span class="empty" @click="clearCart">清空</span>
           </div>
           <div class="list-content">
             <ul>
-              <li class="food"
-                  v-for="(food, index) in cartFoods"
-                  :key="index">
+              <li class="food" v-for="(food, index) in cartFoods" :key="index">
                 <span class="name">{{ food.name }}</span>
                 <div class="price">
                   <span>￥{{ food.price }}</span>
@@ -52,9 +45,7 @@
         </div>
       </transition>
     </div>
-    <div class="list-mask"
-         v-show="listShow"
-         @click="toggleShow()"></div>
+    <div class="list-mask" v-show="listShow" @click="toggleShow()"></div>
   </div>
 </template>
 
@@ -68,27 +59,27 @@ export default {
   components: {
     CartControl
   },
-  data () {
+  data() {
     return {
       isShow: false
     };
   },
   methods: {
-    toggleShow () {
+    toggleShow() {
       if (this.totalCount > 0) {
         this.isShow = !this.isShow;
       }
     },
-    clearCart () {
+    clearCart() {
       MessageBox.confirm("确定清空购物车?").then(
         () => {
           this.$store.dispatch("clearCart");
         },
-        () => { }
+        () => {}
       );
     },
     // 实现BScroll的实例是一个单例
-    mscroll () {
+    mscroll() {
       if (!this.scroll) {
         this.scroll = new BScroll(".list-content", {
           click: true
@@ -97,7 +88,7 @@ export default {
         this.scroll.refresh(); // 让滚动条刷新一下: 重新统计内容的高度
       }
     },
-    misShow () {
+    misShow() {
       this.isShow = false;
     }
   },
@@ -105,12 +96,12 @@ export default {
   computed: {
     ...mapState(["cartFoods", "info"]),
     ...mapGetters(["totalCount", "totalPrice"]),
-    payClass () {
+    payClass() {
       const { totalPrice } = this;
       const { minPrice } = this.info;
       return totalPrice >= minPrice ? "enough" : "not-enough";
     },
-    payText () {
+    payText() {
       const { totalPrice } = this;
       const { minPrice } = this.info;
       if (totalPrice === 0) {
@@ -121,7 +112,7 @@ export default {
         return "结算";
       }
     },
-    listShow () {
+    listShow() {
       // 如果总数量为0, 直接不显示
       if (this.totalCount === 0) {
         this.misShow();
@@ -138,8 +129,8 @@ export default {
       return this.isShow;
     }
   },
-  created () { },
-  mounted () { }
+  created() {},
+  mounted() {}
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
