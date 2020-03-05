@@ -2,18 +2,19 @@
   <section class="msite">
     <!--首页头部-->
     <HeaderTop :title="address.name">
-      <span class="header_search" slot="left" @click="$router.push('/search')">
+      <span class="header_search"
+            slot="left"
+            @click="$router.push('/search')">
         <i class="iconfont icon-sousuo1"></i>
       </span>
-      <router-link
-        class="header_login"
-        :to="{ name: userInfo._id ? 'userinfo' : 'login' }"
-        slot="right"
-      >
-        <span class="header_login_text" v-if="!userInfo._id">登录|注册 </span>
-        <span class="header_login_text" v-else>
-          <i class="iconfont icon-zhanghao"></i
-        ></span>
+      <router-link class="header_login"
+                   :to="{ name: userInfo._id ? 'userinfo' : 'login' }"
+                   slot="right">
+        <span class="header_login_text"
+              v-if="!userInfo._id">登录|注册 </span>
+        <span class="header_login_text"
+              v-else>
+          <i class="iconfont icon-zhanghao"></i></span>
       </router-link>
     </HeaderTop>
     <!-- HeaderTop -->
@@ -28,19 +29,16 @@
     </template>
     <!--首页导航-->
     <nav class="msite_nav">
-      <div class="swiper-container" v-if="categorysArr.length">
+      <div class="swiper-container"
+           v-if="categorysArr.length">
         <div class="swiper-wrapper">
-          <div
-            class="swiper-slide"
-            v-for="(categorys, index) in categorysArr"
-            :key="index"
-          >
-            <a
-              href="javascript:"
-              class="link_to_food"
-              v-for="(category, index) in categorys"
-              :key="index"
-            >
+          <div class="swiper-slide"
+               v-for="(categorys, index) in categorysArr"
+               :key="index">
+            <a href="javascript:"
+               class="link_to_food"
+               v-for="(category, index) in categorys"
+               :key="index">
               <div class="food_container">
                 <img :src="baseImageUrl + category.image_url" />
               </div>
@@ -52,7 +50,8 @@
         <div class="swiper-pagination"></div>
       </div>
       <div v-else>
-        <img src="./images/msite_back.svg" alt="" />
+        <img src="./images/msite_back.svg"
+             alt="" />
       </div>
     </nav>
     <!--首页附近商家-->
@@ -79,7 +78,7 @@ export default {
   },
   computed: {
     ...mapState(["address", "categorys", "shops", "userInfo"]),
-    categorysArr() {
+    categorysArr () {
       const { categorys } = this;
       const arr = [];
       let minArr = [];
@@ -95,14 +94,14 @@ export default {
       return arr;
     }
   },
-  async mounted() {
+  async mounted () {
     // this.$store.dispatch('getAddress')
     this.getAddress();
     this.getCategory();
     this.getShops();
   },
   watch: {
-    categorysArr() {
+    categorysArr () {
       // setTimeout(() => {
       //   new Swiper('.swiper-container',
       //     loop: true,
@@ -124,7 +123,7 @@ export default {
   methods: {
     ...mapActions(["getAddress", "getCategory", "getShops"])
   },
-  data() {
+  data () {
     return {
       title: "",
       baseImageUrl: "https://fuss10.elemecdn.com" // icon图片基础路径
@@ -133,57 +132,85 @@ export default {
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '../../common/stylus/mixins.styl'
-.msite // 首页
-  width 100%
-  .msite_nav
-    bottom-border-1px(#e4e4e4)
-    margin-top 45px
-    height 200px
-    background #fff
-    .swiper-container
-      width 100%
-      height 100%
-      .swiper-wrapper
-        width 100%
-        height 100%
-        .swiper-slide
-          display flex
-          justify-content center
-          align-items flex-start
-          flex-wrap wrap
-          .link_to_food
-            width 25%
-            .food_container
-              display block
-              width 100%
-              text-align center
-              padding-bottom 10px
-              font-size 0
-              img
-                display inline-block
-                width 50px
-                height 50px
-            span
-              display block
-              width 100%
-              text-align center
-              font-size 13px
-              color #666
-      .swiper-pagination
-        >span.swiper-pagination-bullet-active
-          background #02a774
-  .msite_shop_list
-    top-border-1px(#e4e4e4)
-    margin-top 10px
-    background #fff
-    .shop_header
-      padding 10px 10px 0
-      .shop_icon
-        margin-left 5px
-        color #999
-      .shop_header_title
-        color #999
-        font-size 14px
-        line-height 20px
+// @import '../../common/stylus/mixins.styl';
+.msite { // 首页
+  width: 100%;
+
+  .msite_nav {
+    bottom-border-1px(#e4e4e4);
+    margin-top: 45px;
+    height: 200px;
+    background: #fff;
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+
+      .swiper-wrapper {
+        width: 100%;
+        height: 100%;
+
+        .swiper-slide {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          flex-wrap: wrap;
+
+          .link_to_food {
+            width: 25%;
+
+            .food_container {
+              display: block;
+              width: 100%;
+              text-align: center;
+              padding-bottom: 10px;
+              font-size: 0;
+
+              img {
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+              }
+            }
+
+            span {
+              display: block;
+              width: 100%;
+              text-align: center;
+              font-size: 13px;
+              color: #666;
+            }
+          }
+        }
+      }
+
+      .swiper-pagination {
+        >span.swiper-pagination-bullet-active {
+          background: #02a774;
+        }
+      }
+    }
+  }
+
+  .msite_shop_list {
+    top-border-1px(#e4e4e4);
+    margin-top: 10px;
+    background: #fff;
+
+    .shop_header {
+      padding: 10px 10px 0;
+
+      .shop_icon {
+        margin-left: 5px;
+        color: #999;
+      }
+
+      .shop_header_title {
+        color: #999;
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+  }
+}
 </style>
