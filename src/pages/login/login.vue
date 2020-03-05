@@ -94,7 +94,7 @@
                 />
                 <img
                   class="get_verification"
-                  src="http://localhost:4000/captcha"
+                  src="/api/captcha"
                   @click="getCaptcha"
                   alt="captcha"
                   ref="captcha"
@@ -217,8 +217,7 @@ export default {
     },
     getCaptcha() {
       // 图形验证码
-      this.$refs.captcha.src =
-        "http://localhost:4000/captcha?time=" + Date.now();
+      this.$refs.captcha.src = "/api/captcha?time=" + Date.now();
       // event.target.src = 'http://localhost:4000/captcha?time=' + Date.now()
     }
   },

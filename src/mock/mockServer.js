@@ -1,14 +1,14 @@
-import Mock from 'mockjs'
-import data from './data.json'
-Mock.mock('/goods', {
+import Mock from "mockjs";
+import data from "./data.json";
+Mock.mock("/goods", {
   code: 0,
   data: data.goods
-})
-Mock.mock('/ratings', {
+});
+Mock.mock("/ratings", {
   code: 0,
   data: data.ratings
-})
-Mock.mock('/info', {
+});
+Mock.mock("/info", {
   code: 0,
   data: data.info
-})
+});
