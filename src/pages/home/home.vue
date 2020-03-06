@@ -103,14 +103,6 @@ export default {
   },
   watch: {
     categorysArr() {
-      // setTimeout(() => {
-      //   new Swiper('.swiper-container',
-      //     loop: true,
-      //     pagination: {
-      //       el: '.swiper-pagination'
-      //     }
-      //   })
-      // }, 100)
       this.$nextTick(() => {
         this.swiper = new Swiper(".swiper-container", {
           loop: true,
