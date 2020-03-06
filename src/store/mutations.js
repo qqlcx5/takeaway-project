@@ -44,6 +44,7 @@ export default {
     // console.log(info)
     state.info = info;
   },
+  // 添加商品
   [INCREMENT_FOOD_COUNT](state, { food }) {
     if (!food.count) {
       Vue.set(food, "count", 1);
@@ -53,6 +54,7 @@ export default {
       food.count++;
     }
   },
+  // 删除商品
   [DECREMENT_FOOD_COUNT](state, { food }) {
     if (food.count) {
       food.count--;
@@ -61,12 +63,22 @@ export default {
       }
     }
   },
+  // 清空购物车
   [CLEARCART](state) {
     state.cartFoods.forEach(element => {
       element.count = 0;
     });
     state.cartFoods = [];
   },
+  /**
+   * const obj = {a:1}
+   * const beasts = [{d:3},obj,{b:1}];
+   * console.log(beasts.indexOf(obj));
+   * > 1
+   * 总结 indexof 查找相同的堆内存，而不是查找{a:1}
+   */
+
+
   // 接收搜索的商家数组
   [RECEIVE_SEARCH_SHOPS](state, { searchShops }) {
     state.searchShops = searchShops;
